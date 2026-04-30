@@ -14,8 +14,10 @@ These simulate backend systems:
 **Inventory API**
 - GET /inventory/{productId}
 - PATCH /inventory/{productId} (reduce stock)
+
 **Payment API**
   - POST /payments (mock success/failure)
+
 **Order DB API**
   - POST /orders (store order)
 
