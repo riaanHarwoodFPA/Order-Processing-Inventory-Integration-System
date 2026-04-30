@@ -31,3 +31,14 @@ These simulate backend systems:
 - Error Handler – manage failures
 - Logger – debugging + monitoring
 - VM Queue (optional) – async processing
+
+<br>
+
+## Core Idea
+
+A central orchestration layer using MuleSoft Anypoint Platform that:
+- Receives an order
+- Validates it
+- Talks to multiple backend systems
+- Handles failures gracefully
+- Returns a clean response
