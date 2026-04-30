@@ -9,8 +9,8 @@ A central orchestration layer using MuleSoft Anypoint Platform that:
 - Receives an order
 - Validates it
 - Talks to multiple backend systems
-- Handles failures gracefully
-- Returns a clean response
+- Handles failures 
+- Returns a clean response (Frontend UI)
 
 <br>
 
