@@ -3,6 +3,17 @@ Enterprise-style order processing system using MuleSoft Anypoint Platform that i
 
 <br>
 
+## Core Idea
+
+A central orchestration layer using MuleSoft Anypoint Platform that:
+- Receives an order
+- Validates it
+- Talks to multiple backend systems
+- Handles failures gracefully
+- Returns a clean response
+
+<br>
+
 ## 🏗️ Architecture (API-Led)
 
 You’ll follow MuleSoft’s 3-layer architecture:
@@ -33,12 +44,3 @@ These simulate backend systems:
 - VM Queue (optional) – async processing
 
 <br>
-
-## Core Idea
-
-A central orchestration layer using MuleSoft Anypoint Platform that:
-- Receives an order
-- Validates it
-- Talks to multiple backend systems
-- Handles failures gracefully
-- Returns a clean response
