@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mycompany</groupId>
+    <artifactId>order-processing-inventory-integration-system</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Order Processing Inventory Integration System</name>
+    <description>Multi-project Mule application with Experience, Process, and System APIs</description>
+
+    <modules>
+        <module>experience-api</module>
+        <module>process-api</module>
+        <module>system-api-inventory</module>
+        <module>system-api-payment</module>
+        <module>system-api-orders</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <app.runtime>4.11.2</app.runtime>
+        <mule.maven.plugin.version>4.7.0</mule.maven.plugin.version>
+    </properties>
+
+</project>
