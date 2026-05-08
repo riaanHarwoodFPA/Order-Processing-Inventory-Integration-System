@@ -12,6 +12,9 @@ This project implements MuleSoft's **3-layer API-led architecture**:
 2. **Process APIs** – Business logic orchestration and workflows
 3. **Experience APIs** – Customer-facing interfaces and data transformation
 
+RDBS: **PostgreSQL (Supabase)**
+Testing: **Postman** 
+
 The core flow: receive order → validate → coordinate with backend systems → handle errors → return response.
 
 <br>
