@@ -25,14 +25,17 @@ You’ll follow MuleSoft’s 3-layer architecture:
 These simulate backend systems:
 
 2. **Inventory API**
-- **GET** /inventory/{productId}
-- **PATCH** /inventory/{productId} (reduce stock)
+   
+**GET** /inventory/{productId}
+**PATCH** /inventory/{productId} (reduce stock)
 
 3. **Payment API**
-  - **POST** /payments (mock success/failure)
+   
+**POST** /payments (mock success/failure)
 
 **Order DB API**
-  - **POST** /orders (store order)
+
+**POST** /orders (store order)
 
 <br> 
 
