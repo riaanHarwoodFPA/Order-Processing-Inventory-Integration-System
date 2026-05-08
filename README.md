@@ -1,3 +1,5 @@
+**Integration Practice Project**
+
 # Order-Processing-Inventory-Integration-System
 
 Enterprise-grade order processing system using MuleSoft Anypoint Platform with API-led architecture integrating inventory, payment, and order management services.
@@ -82,9 +84,12 @@ Exposes customer-facing endpoints with data transformation via DataWeave and res
 ## Building & Running
 
 ### Prerequisites
-- MuleSoft Anypoint Studio or Maven CLI
+- MuleSoft Anypoint Studio or Visual Studio Code
 - Java 8+
 - Maven 3.6+
+- Supabase
+- Postman
+- Command Prompt/Terminal (for directory management) 
 
 ### Build
 ```bash
