@@ -24,11 +24,11 @@ You’ll follow MuleSoft’s 3-layer architecture:
 
 These simulate backend systems:
 
-**Inventory API**
+2. **Inventory API**
 - **GET** /inventory/{productId}
 - **PATCH** /inventory/{productId} (reduce stock)
 
-**Payment API**
+3. **Payment API**
   - **POST** /payments (mock success/failure)
 
 **Order DB API**
