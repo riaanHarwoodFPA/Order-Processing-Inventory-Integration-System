@@ -20,19 +20,19 @@ A central orchestration layer using MuleSoft Anypoint Platform that:
 
 You’ll follow MuleSoft’s 3-layer architecture:
 
-1. System APIs (Data Access Layer)
+1. **System APIs** (Data Access Layer)
 
 These simulate backend systems:
 
 **Inventory API**
-- GET /inventory/{productId}
-- PATCH /inventory/{productId} (reduce stock)
+- **GET** /inventory/{productId}
+- **PATCH** /inventory/{productId} (reduce stock)
 
 **Payment API**
-  - POST /payments (mock success/failure)
+  - **POST** /payments (mock success/failure)
 
 **Order DB API**
-  - POST /orders (store order)
+  - **POST** /orders (store order)
 
 <br> 
 
@@ -46,3 +46,12 @@ These simulate backend systems:
 - VM Queue (optional) – async processing
 
 <br>
+
+
+## Authentication & RDBS
+
+TO BE UPDATED.
+
+<br>
+
+## Licenses
