@@ -33,7 +33,7 @@ These simulate backend systems:
    
 **POST** /payments (mock success/failure)
 
-**Order DB API**
+4. **Order DB API**
 
 **POST** /orders (store order)
 
