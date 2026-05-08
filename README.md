@@ -1,60 +1,100 @@
-**Intergation Practice Project**
-
 # Order-Processing-Inventory-Integration-System
-Enterprise-style order processing system using MuleSoft Anypoint Platform that integrates inventory, payment, and order services via API-led architecture.
+
+Enterprise-grade order processing system using MuleSoft Anypoint Platform with API-led architecture integrating inventory, payment, and order management services.
 
 <br>
 
-## Core Idea
+## Overview
 
-A central orchestration layer using MuleSoft Anypoint Platform that:
-- Receives an order
-- Validates it
-- Talks to multiple backend systems
-- Handles failures 
-- Returns a clean response (Frontend UI)
+This project implements MuleSoft's **3-layer API-led architecture**:
+
+1. **System APIs** – Direct data access to backend systems (orders, inventory, payments)
+2. **Process APIs** – Business logic orchestration and workflows
+3. **Experience APIs** – Customer-facing interfaces and data transformation
+
+The core flow: receive order → validate → coordinate with backend systems → handle errors → return response.
 
 <br>
 
-## 🏗️ Architecture (API-Led)
+---
 
-You’ll follow MuleSoft’s 3-layer architecture:
+## Project Structure
 
-1. **System APIs** (Data Access Layer)
+```
+Order-Processing-Inventory-Integration-System/
+├── experience-api/              # Customer-facing APIs
+├── process-api/                 # Business logic & orchestration
+├── services/
+│   ├── system-api-orders/       # Order data access layer
+│   ├── system-api-inventory/    # Inventory data access layer
+│   └── system-api-payment/      # Payment processing layer
+├── pom.xml                       # Root Maven configuration
+└── README.md
+```
 
-These simulate backend systems:
+---
 
-2. **Inventory API**
-   
-**GET** /inventory/{productId}
-**PATCH** /inventory/{productId} (reduce stock)
+## Module Descriptions
 
-3. **Payment API**
-   
-**POST** /payments (mock success/failure)
+### System APIs (Data Access Layer)
 
-4. **Order DB API**
+These modules simulate and manage backend system integrations:
 
-**POST** /orders (store order)
+- **system-api-orders** – Order database operations
+  - `POST /orders` – Create order
+  - `GET /orders/{orderId}` – Retrieve order
+
+- **system-api-inventory** – Inventory management
+  - `GET /inventory/{productId}` – Check stock
+  - `PATCH /inventory/{productId}` – Update stock
+
+- **system-api-payment** – Payment processing
+  - `POST /payments` – Process payment (mock success/failure)
+
+### Process API
+
+Orchestrates business logic across system APIs, handling validation, error management, and workflow coordination.
+
+### Experience API
+
+Exposes customer-facing endpoints with data transformation via DataWeave and response formatting.
+
+---
 
 <br> 
 
 ## Key Mule Components
-- HTTP Listener – receive requests
-- HTTP Request – call other APIs
-- DataWeave – transform data
-- Choice Router – business logic decisions
-- Error Handler – manage failures
-- Logger – debugging + monitoring
-- VM Queue (optional) – async processing
 
-<br>
+- **HTTP Listener** – Receive incoming requests
+- **HTTP Request** – Call downstream APIs
+- **DataWeave** – Data transformation and mapping
+- **Choice Router** – Conditional business logic
+- **Error Handler** – Exception management
+- **Logger** – Debugging and monitoring
+- **VM Queue** – Async message processing (optional)
 
+---
 
-## Authentication & RDBS
+## Building & Running
 
-TO BE UPDATED.
+### Prerequisites
+- MuleSoft Anypoint Studio or Maven CLI
+- Java 8+
+- Maven 3.6+
 
-<br>
+### Build
+```bash
+mvn clean install
+```
 
-## Licenses
+### Run Individual Modules
+```bash
+# From module directory
+mvn clean package mule:deploy
+```
+
+---
+
+## License
+
+See LICENSE file for details.
