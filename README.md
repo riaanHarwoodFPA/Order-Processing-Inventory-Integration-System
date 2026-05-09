@@ -18,7 +18,7 @@ RDBS: **PostgreSQL (Supabase)**
 
 Testing: **Postman** 
 
-The core flow: **receive order → validate → coordinate with backend systems → handle errors → return response.**
+The core flow: **view/ or receive order → validate → coordinate with backend systems → handle errors → return response.**
 
 <br>
 
