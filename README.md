@@ -21,6 +21,11 @@ Testing: **Postman**
 The core flow: receive order → validate → coordinate with backend systems → handle errors → return response.
 
 
+**Example**
+
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/e75d7240-ba17-4899-87c5-372fd6581760" />
+
+
 ---
 
 ## User Flow (Customer Perspective)
