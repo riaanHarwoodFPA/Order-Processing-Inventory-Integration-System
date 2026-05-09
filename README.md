@@ -123,4 +123,4 @@ See LICENSE file for details.
 
 **DISCLAIMER** 
 
-_Please note, that the data and assets used in this project are for demonstration purposes only and do not represent real or accurate **Fisher & Paykel** products. All asset-related information within this project is fictional and has been created solely for the demonstration. This project is a personal **skills** and **capability** showcase intended to illustrate my experience with **MuleSoft** Software._
+_Please note, that the data and assets used in this project are for demonstration purposes only and do not represent real or accurate **Fisher & Paykel** products. All asset-related information within this project is fictional and has been created solely for demonstration. This project is a personal **skills** and **capability** showcase intended to illustrate my experience with **MuleSoft** Software._
