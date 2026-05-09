@@ -22,7 +22,7 @@ The core flow: **view/ or receive order → validate → coordinate with backend
 
 <br>
 
-### Fig.1 - Example of UI (Eperience API)
+**Fig.1 - Example of UI (Eperience API)**
 
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/e75d7240-ba17-4899-87c5-372fd6581760" />
 
