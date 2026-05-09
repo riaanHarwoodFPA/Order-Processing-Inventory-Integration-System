@@ -22,7 +22,7 @@ The core flow: **receive order → validate → coordinate with backend systems 
 
 <br>
 
-### Fig.1 - Example of UI 
+### Fig.1 - Example of UI (Eperience API)
 
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/e75d7240-ba17-4899-87c5-372fd6581760" />
 
@@ -113,6 +113,13 @@ mvn clean package mule:deploy
 ```
 
 ---
+
+<br>
+
+## DISCLAIMER 
+
+_Please note, that the data and assets used in this project are for demonstration purposes only and do not represent real or accurate Fisher & Paykel products. All asset-related information within this project is fictional and has been created solely for demonstration. This project is a personal skills and capability showcase intended to illustrate my experience with MuleSoft Software._
+
 
 ## License
 
