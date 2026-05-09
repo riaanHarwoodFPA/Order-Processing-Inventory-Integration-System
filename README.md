@@ -61,6 +61,7 @@ These modules simulate and manage backend system integrations:
 - **system-api-orders** – Order database operations
   - `POST /orders` – Create order
   - `GET /orders/{orderId}` – Retrieve order
+  - `DELETE /orders/{orderId}` – Delete order
 
 - **system-api-inventory** – Inventory management
   - `GET /inventory/{productId}` – Check stock
