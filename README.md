@@ -34,8 +34,6 @@ The core flow: **receive order → validate → coordinate with backend systems 
 Customers interact with the system through a simple API where they can browse available inventory, place orders, view specific orders, and make updates if needed. Behind the scenes, the system handles inventory validation, payment processing, and order management, ensuring each request is processed reliably and returns a clear, structured response.
 
 
-<br> 
-
 ---
 
 ## Project Structure
