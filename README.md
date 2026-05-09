@@ -75,8 +75,6 @@ Exposes customer-facing endpoints with data transformation via DataWeave and res
 
 ---
 
-<br> 
-
 ## Key Mule Components
 
 - **HTTP Listener** – Receive incoming requests
