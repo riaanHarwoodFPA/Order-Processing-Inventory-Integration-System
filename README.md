@@ -91,6 +91,8 @@ Exposes customer-facing endpoints with data transformation via DataWeave and res
 - **Error Handler** – Exception management
 - **Logger** – Debugging and monitoring
 - **VM Queue** – Async message processing (optional)
+- **Salesforce connector** — Using OAuth 2.0 client credentials - (to be implemented at a later stage)
+
 
 ---
 
