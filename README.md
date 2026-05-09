@@ -20,7 +20,6 @@ Testing: **Postman**
 
 The core flow: receive order → validate → coordinate with backend systems → handle errors → return response.
 
-<br>
 
 ---
 
