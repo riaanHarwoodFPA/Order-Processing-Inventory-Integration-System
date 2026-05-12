@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
-  
-  <!-- Global configurations go here -->
-  
+  xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+  http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+
+  <configuration-properties doc:name="Application Properties" file="application.yaml" />
+
+  <http:listener-config name="experience-http-listener" doc:name="Experience HTTP Listener">
+    <http:listener-connection host="${http.host}" port="${http.port}" />
+  </http:listener-config>
+
+  <http:request-config name="idp-http-request" doc:name="Identity Provider HTTP Request" basePath="${idp.basePath}">
+    <http:request-connection protocol="${idp.protocol}" host="${idp.host}" port="${idp.port}" />
+  </http:request-config>
+
 </mule>

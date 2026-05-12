@@ -1,0 +1,20 @@
+http:
+  host: "0.0.0.0"
+  port: "8081"
+
+idp:
+  protocol: "HTTPS"
+  host: "YOUR_IDP_DOMAIN"
+  port: "443"
+  basePath: ""
+  connection: "Username-Password-Authentication"
+  audience: "YOUR_API_AUDIENCE"
+  clientId: "YOUR_CLIENT_ID"
+  clientSecret: "YOUR_CLIENT_SECRET"
+  managementApiToken: "YOUR_MANAGEMENT_API_TOKEN"
+  endpoints:
+    register: "/api/v2/users"
+    token: "/oauth/token"
+    mfaChallenge: "/mfa/challenge"
+    mfaVerify: "/mfa/verify"
+    userInfo: "/userinfo"

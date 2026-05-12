@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+    xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+    http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+
+    <flow name="auth-register-flow">
+        <http:listener config-ref="experience-http-listener" path="/auth/register" allowedMethods="POST">
+            <http:response statusCode="#[(vars.httpStatus default 201)]" />
+            <http:error-response statusCode="#[(vars.httpStatus default 500)]" />
+        </http:listener>
+
+        <choice>
+            <when expression="#[(payload.email default null) == null or (payload.password default null) == null]">
+                <set-variable variableName="httpStatus" value="400" />
+                <set-payload value="#[(output application/json --- { error: 'email and password are required' })]" />
+            </when>
+            <otherwise>
+                <http:request config-ref="idp-http-request" method="POST" path="${idp.endpoints.register}">
+                    <http:headers><![CDATA[#[
+                        {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' ++ p('idp.managementApiToken')
+                        }
+                    ]]]></http:headers>
+                    <http:body><![CDATA[#[
+                        output application/json
+                        ---
+                        {
+                            email: payload.email,
+                            password: payload.password,
+                            connection: p('idp.connection')
+                        }
+                    ]]]></http:body>
+                </http:request>
+                <set-payload value="#[(output application/json --- { message: 'User registered', user: payload })]" />
+            </otherwise>
+        </choice>
+    </flow>
+
+    <flow name="auth-login-flow">
+        <http:listener config-ref="experience-http-listener" path="/auth/login" allowedMethods="POST">
+            <http:response statusCode="#[(vars.httpStatus default 200)]" />
+            <http:error-response statusCode="#[(vars.httpStatus default 500)]" />
+        </http:listener>
+
+        <choice>
+            <when expression="#[(payload.username default null) == null or (payload.password default null) == null]">
+                <set-variable variableName="httpStatus" value="400" />
+                <set-payload value="#[(output application/json --- { error: 'username and password are required' })]" />
+            </when>
+            <otherwise>
+                <http:request config-ref="idp-http-request" method="POST" path="${idp.endpoints.token}">
+                    <http:headers><![CDATA[#[
+                        {
+                            'Content-Type': 'application/json'
+                        }
+                    ]]]></http:headers>
+                    <http:body><![CDATA[#[
+                        output application/json
+                        ---
+                        {
+                            client_id: p('idp.clientId'),
+                            client_secret: p('idp.clientSecret'),
+                            grant_type: 'password',
+                            username: payload.username,
+                            password: payload.password,
+                            audience: p('idp.audience'),
+                            scope: 'openid profile email offline_access'
+                        }
+                    ]]]></http:body>
+                </http:request>
+            </otherwise>
+        </choice>
+    </flow>
+
+    <flow name="auth-2fa-challenge-flow">
+        <http:listener config-ref="experience-http-listener" path="/auth/2fa/challenge" allowedMethods="POST">
+            <http:response statusCode="#[(vars.httpStatus default 200)]" />
+            <http:error-response statusCode="#[(vars.httpStatus default 500)]" />
+        </http:listener>
+
+        <set-variable variableName="bearerToken" value="#[(attributes.headers.authorization default '') replace 'Bearer ' with '']" />
+        <choice>
+            <when expression="#[(vars.bearerToken default '') == '']">
+                <set-variable variableName="httpStatus" value="401" />
+                <set-payload value="#[(output application/json --- { error: 'Missing Bearer token' })]" />
+            </when>
+            <otherwise>
+                <http:request config-ref="idp-http-request" method="POST" path="${idp.endpoints.mfaChallenge}">
+                    <http:headers><![CDATA[#[
+                        {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' ++ vars.bearerToken
+                        }
+                    ]]]></http:headers>
+                    <http:body><![CDATA[#[
+                        output application/json
+                        ---
+                        {
+                            challenge_type: payload.challenge_type default 'otp',
+                            authenticator_id: payload.authenticator_id default null
+                        }
+                    ]]]></http:body>
+                </http:request>
+            </otherwise>
+        </choice>
+    </flow>
+
+    <flow name="auth-2fa-verify-flow">
+        <http:listener config-ref="experience-http-listener" path="/auth/2fa/verify" allowedMethods="POST">
+            <http:response statusCode="#[(vars.httpStatus default 200)]" />
+            <http:error-response statusCode="#[(vars.httpStatus default 500)]" />
+        </http:listener>
+
+        <set-variable variableName="bearerToken" value="#[(attributes.headers.authorization default '') replace 'Bearer ' with '']" />
+        <choice>
+            <when expression="#[(vars.bearerToken default '') == '' or (payload.otp_code default null) == null]">
+                <set-variable variableName="httpStatus" value="400" />
+                <set-payload value="#[(output application/json --- { error: 'Bearer token and otp_code are required' })]" />
+            </when>
+            <otherwise>
+                <http:request config-ref="idp-http-request" method="POST" path="${idp.endpoints.mfaVerify}">
+                    <http:headers><![CDATA[#[
+                        {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' ++ vars.bearerToken
+                        }
+                    ]]]></http:headers>
+                    <http:body><![CDATA[#[
+                        output application/json
+                        ---
+                        {
+                            otp_code: payload.otp_code,
+                            challenge_id: payload.challenge_id default null
+                        }
+                    ]]]></http:body>
+                </http:request>
+            </otherwise>
+        </choice>
+    </flow>
+
+    <flow name="auth-me-flow">
+        <http:listener config-ref="experience-http-listener" path="/auth/me" allowedMethods="GET">
+            <http:response statusCode="#[(vars.httpStatus default 200)]" />
+            <http:error-response statusCode="#[(vars.httpStatus default 500)]" />
+        </http:listener>
+
+        <set-variable variableName="bearerToken" value="#[(attributes.headers.authorization default '') replace 'Bearer ' with '']" />
+        <choice>
+            <when expression="#[(vars.bearerToken default '') == '']">
+                <set-variable variableName="httpStatus" value="401" />
+                <set-payload value="#[(output application/json --- { error: 'Missing Bearer token' })]" />
+            </when>
+            <otherwise>
+                <http:request config-ref="idp-http-request" method="GET" path="${idp.endpoints.userInfo}">
+                    <http:headers><![CDATA[#[
+                        {
+                            'Authorization': 'Bearer ' ++ vars.bearerToken
+                        }
+                    ]]]></http:headers>
+                </http:request>
+            </otherwise>
+        </choice>
+    </flow>
+
+</mule>
